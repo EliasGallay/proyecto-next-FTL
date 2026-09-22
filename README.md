@@ -181,6 +181,9 @@ export default async function OfertaDetallePage({ params }: Props) {
 ```
 src/
 ├── app/                  # Rutas de la aplicación (ver tabla anterior)
+│   ├── api/              # Route Handlers (endpoints de la API)
+│   │   └── saludo/
+│   │       └── route.ts  # GET /api/saludo
 │   ├── globals.css       # Estilos globales + variables de color
 │   └── layout.tsx        # Layout raíz: envuelve todas las páginas
 ├── components/
