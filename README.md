@@ -289,6 +289,12 @@ El proyecto incluye `src/hooks/useOferta.ts` como punto de partida:
 
 ```ts
 // src/hooks/useOferta.ts
+import { useEffect, useState } from "react";
+
+interface Oferta {
+  id: string;
+}
+
 export function useOferta(id: string) {
   const [data, setData] = useState<Oferta | null>(null);
   const [loading, setLoading] = useState(true);
@@ -439,7 +445,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 ### Regla de prefijos
 
 | Prefijo | Dónde se puede leer | Cuándo usarlo |
-|---------|--------------------|--------------:|
+|---------|--------------------|--------------| 
 | Sin prefijo | Solo en el servidor (Route Handlers, Server Components) | Secretos, credenciales |
 | `NEXT_PUBLIC_` | En el servidor y en el cliente | Valores que el browser puede ver |
 
@@ -504,8 +510,6 @@ notas-personales.txt
 ```
 
 **Regla:** si un archivo contiene credenciales, es generado automáticamente, o es específico de tu máquina, va en `.gitignore`.
-
----
 
 ### Flujo de trabajo con ramas
 
