@@ -463,6 +463,116 @@ NEXT_PUBLIC_APP_URL=
 
 ---
 
+## Control de versiones con Git
+
+### `.gitignore` — qué no se sube al repositorio
+
+El archivo `.gitignore` en la raíz del proyecto le indica a Git qué archivos y carpetas ignorar. El proyecto ya tiene uno configurado con las exclusiones necesarias para Next.js:
+
+| Entrada | Por qué se ignora |
+|---------|------------------|
+| `node_modules/` | Dependencias instaladas localmente — cada uno las instala con `npm install` |
+| `.next/` | Archivos generados por el servidor de desarrollo y el build |
+| `.env*` | Archivos de entorno — pueden contener contraseñas y claves |
+| `*.tsbuildinfo` | Caché de compilación de TypeScript |
+
+Para agregar nuevas entradas, editá el archivo `.gitignore` directamente:
+
+```bash
+# ignorar una carpeta
+/mi-carpeta/
+
+# ignorar un tipo de archivo
+*.log
+
+# ignorar un archivo específico
+notas-personales.txt
+```
+
+**Regla:** si un archivo contiene credenciales, es generado automáticamente, o es específico de tu máquina, va en `.gitignore`.
+
+---
+
+### Flujo de trabajo con ramas
+
+El repositorio usa dos tipos de ramas:
+
+- **`main`** — código estable. Lo que está acá debe funcionar siempre. Nadie trabaja directamente sobre esta rama.
+- **`feature/nombre-de-la-tarea`** — una rama por cada funcionalidad o tarea. Se crea a partir de `main`, se trabaja ahí, y cuando está lista se integra de vuelta.
+
+#### Crear y trabajar en una rama feature
+
+```bash
+# 1. Asegurate de estar en main y tenerlo actualizado
+git checkout main
+git pull origin main
+
+# 2. Crear la rama feature
+git checkout -b feature/listado-ofertas
+
+# 3. Trabajar, guardar cambios
+git status                         # ver qué archivos cambiaron
+git add src/app/ofertas/page.tsx   # agregar archivos específicos
+git add .                          # o agregar todos los cambios
+
+# 4. Hacer un commit
+git commit -m "feat: agrega listado de ofertas"
+
+# 5. Subir la rama al repositorio remoto
+git push origin feature/listado-ofertas
+```
+
+#### Integrar la rama en main (Pull Request)
+
+Una vez que la funcionalidad está completa y revisada:
+
+```bash
+# Opción A: merge directo (en equipos pequeños o sin revisión)
+git checkout main
+git merge feature/listado-ofertas
+git push origin main
+
+# Opción B: Pull Request (recomendada en equipo)
+# Subís la rama con git push, abrís un PR en GitHub/GitLab,
+# un compañero la revisa, y se mergea desde la interfaz.
+```
+
+Después de mergear, podés borrar la rama feature:
+
+```bash
+git branch -d feature/listado-ofertas           # borra local
+git push origin --delete feature/listado-ofertas # borra remoto
+```
+
+#### Resumen del ciclo completo
+
+```
+main ──────────────────────────────────────► main (estable)
+       │                          │
+       └─► feature/mi-tarea ──────┘
+           (trabajás acá)    (merge al terminar)
+```
+
+#### Mensajes de commit
+
+Usá el formato `tipo: descripción` para que el historial sea legible:
+
+| Tipo | Cuándo usarlo |
+|------|--------------|
+| `feat:` | Nueva funcionalidad |
+| `fix:` | Corrección de un bug |
+| `style:` | Cambios de estilos o formato |
+| `refactor:` | Cambios internos sin afectar comportamiento |
+| `docs:` | Cambios en documentación |
+
+```bash
+git commit -m "feat: agrega formulario de postulación"
+git commit -m "fix: corrige error 404 en ruta de detalle"
+git commit -m "docs: actualiza README con sección de hooks"
+```
+
+---
+
 ## Diferencias con tutoriales de versiones anteriores de Next.js
 
 Si encontrás ejemplos en internet, tené en cuenta que **Next.js 16 tiene cambios incompatibles** con versiones anteriores:
