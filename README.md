@@ -180,18 +180,29 @@ export default async function OfertaDetallePage({ params }: Props) {
 
 ```
 src/
-├── app/                  # Rutas de la aplicación (ver tabla anterior)
-│   ├── api/              # Route Handlers (endpoints de la API)
+├── app/                        # Rutas de la aplicación
+│   ├── api/                    # Route Handlers (endpoints de la API)
 │   │   └── saludo/
-│   │       └── route.ts  # GET /api/saludo
-│   ├── globals.css       # Estilos globales + variables de color
-│   └── layout.tsx        # Layout raíz: envuelve todas las páginas
+│   │       └── route.ts        # GET /api/saludo
+│   ├── admin/
+│   │   └── page.tsx            # /admin
+│   ├── empresa/
+│   │   └── page.tsx            # /empresa
+│   ├── ofertas/
+│   │   ├── page.tsx            # /ofertas
+│   │   └── [id]/
+│   │       └── page.tsx        # /ofertas/:id
+│   ├── saludo/
+│   │   └── page.tsx            # /saludo
+│   ├── globals.css             # Estilos globales + variables de color
+│   ├── layout.tsx              # Layout raíz: envuelve todas las páginas
+│   └── page.tsx                # /
 ├── components/
-│   └── ui/               # Componentes de interfaz (Button, Input, Calendar…)
-├── hooks/                # Custom hooks reutilizables
-│   └── useOferta.ts      # Ejemplo: fetch de una oferta por id
+│   └── ui/                     # Componentes de interfaz (Button, Input, Calendar…)
+├── hooks/                      # Custom hooks reutilizables
+│   └── useOferta.ts            # Ejemplo: fetch de una oferta por id
 └── lib/
-    └── utils.ts          # Utilidades compartidas (función cn())
+    └── utils.ts                # Utilidades compartidas (función cn())
 ```
 
 ### El layout raíz
