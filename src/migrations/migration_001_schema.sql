@@ -2,6 +2,28 @@
 -- Portal Municipal de Empleo — Migración inicial
 -- Ejecutar en Supabase Dashboard → SQL Editor
 -- ============================================================
+--
+-- ⚠️  CONFIGURACIÓN DE RLS PARA ESTA IMPLEMENTACIÓN
+-- ------------------------------------------------------------
+-- Esta rama implementa un CRUD básico de ofertas SIN autenticación.
+-- Para que las operaciones desde el cliente funcionen, RLS debe
+-- estar deshabilitado en la tabla `ofertas`.
+--
+-- Cómo deshabilitarlo en Supabase Dashboard:
+--   Table Editor → ofertas → RLS disabled
+--   (o ejecutar: ALTER TABLE ofertas DISABLE ROW LEVEL SECURITY;)
+--
+-- Tablas que requieren RLS deshabilitado en esta implementación:
+--   - ofertas       → SELECT, INSERT, UPDATE, DELETE desde el cliente
+--
+-- Tablas donde RLS puede permanecer habilitado (no se usan en el CRUD):
+--   - usuarios, empresas, postulantes, categorias, postulante_categorias
+--   - oferta_categorias, postulaciones, derivaciones
+--
+-- ⚠️  IMPORTANTE: antes de agregar autenticación, volver a habilitar
+-- RLS en `ofertas` y definir políticas por rol (ver rama
+-- feat/supabase-integration → migration_002_rls_policies.sql).
+-- ============================================================
 
 -- ------------------------------------------------------------
 -- EXTENSIONES
