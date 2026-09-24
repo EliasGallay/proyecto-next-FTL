@@ -13,6 +13,10 @@ export default function EmpresaDashboardPage() {
           GET /empresa
         </span>
       </div>
+
+
+
+      
     </main>
   );
 }
