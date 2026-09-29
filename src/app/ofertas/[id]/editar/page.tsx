@@ -56,15 +56,15 @@ export default function EditarOfertaPage({
 
   if (loading) {
     return (
-      <main className="min-h-screen p-8 bg-gray-50">
+      <main className="min-h-screen p-4 sm:p-8 bg-gray-50">
         <p className="text-gray-400 text-sm">Cargando...</p>
       </main>
     )
   }
 
   return (
-    <main className="min-h-screen p-8 bg-gray-50">
-      <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-md p-8">
+    <main className="min-h-screen p-4 sm:p-8 bg-gray-50">
+      <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-md p-5 sm:p-8">
         <h1 className="text-xl font-semibold text-gray-800 mb-6">Editar oferta</h1>
 
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
