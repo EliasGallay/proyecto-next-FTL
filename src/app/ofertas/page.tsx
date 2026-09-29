@@ -38,9 +38,9 @@ export default function OfertasPage() {
   }
 
   return (
-    <main className="min-h-screen p-8 bg-gray-50">
+    <main className="min-h-screen p-4 sm:p-8 bg-gray-50">
       <div className="max-w-3xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
           <h1 className="text-2xl font-semibold text-gray-800">Ofertas laborales</h1>
           <Link
             href="/ofertas/nueva"
