@@ -3,6 +3,7 @@
 import { createSupabaseServerClient } from '@/lib/supabase-server'
 import { supabaseAdmin } from '@/lib/supabase-admin'
 import { redirect } from 'next/navigation'
+import { headers } from 'next/headers'
 
 export async function login(email: string, password: string) {
   try {
@@ -118,6 +119,31 @@ export async function registrarEmpresa(data: {
     return { ok: true }
   } catch {
     return { ok: false, error: 'Error inesperado al crear la cuenta' }
+  }
+}
+
+export async function solicitarRecuperacion(email: string) {
+  try {
+    const supabase = await createSupabaseServerClient()
+    const origin = (await headers()).get('origin') ?? ''
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${origin}/auth/callback`,
+    })
+    if (error) return { ok: false, error: 'No se pudo enviar el email. Intentá de nuevo.' }
+    return { ok: true }
+  } catch {
+    return { ok: false, error: 'Error inesperado al procesar la solicitud' }
+  }
+}
+
+export async function actualizarContrasena(password: string) {
+  try {
+    const supabase = await createSupabaseServerClient()
+    const { error } = await supabase.auth.updateUser({ password })
+    if (error) return { ok: false, error: 'No se pudo actualizar la contraseña. Solicitá un nuevo enlace.' }
+    return { ok: true }
+  } catch {
+    return { ok: false, error: 'Error inesperado al actualizar la contraseña' }
   }
 }
 
