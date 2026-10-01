@@ -39,10 +39,10 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  // Con sesión en login o registro → ir al inicio
-  if (user && !isServerAction && (pathname === '/auth/login' || pathname === '/auth/registro')) {
+  // Con sesión en la raíz, login o registro → ir al inicio
+  if (user && !isServerAction && (pathname === '/' || pathname === '/auth/login' || pathname === '/auth/registro')) {
     const url = request.nextUrl.clone()
-    url.pathname = '/'
+    url.pathname = '/inicio'
     return NextResponse.redirect(url)
   }
 
