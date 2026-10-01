@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Norte | Ingresar",
-  description: "Acceso al espacio de trabajo Norte.",
+  title: "Portal de Empleo | Municipalidad de Funes",
+  description: "Encontrá tu próximo trabajo en el Portal Municipal de Empleo de Funes.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
